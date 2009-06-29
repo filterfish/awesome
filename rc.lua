@@ -56,6 +56,7 @@ floatapps =
     ["MPlayer"] = true,
     ["pinentry"] = true,
     ["gimp"] = true,
+    ["gvim"] = true,
     -- by instance
     ["mocp"] = true
 }
@@ -64,8 +65,6 @@ floatapps =
 -- Use the screen and tags indices.
 apptags =
 {
-    -- ["Firefox"] = { screen = 1, tag = 2 },
-    -- ["mocp"] = { screen = 2, tag = 4 },
     ["sup"] = { screen = 0, tag = 1 }
 }
 
@@ -187,7 +186,7 @@ globalkeys =
 {
     key({ "Control", "Shift"}, "h",      awful.tag.viewprev       ),
     key({ "Control", "Shift"}, "l",      awful.tag.viewnext       ),
-    key({ "Control", "Shift"}, ".",      awful.tag.history.restore),
+    key({ modkey,           }, ".",      awful.tag.history.restore),
 
     key({ "Control", "Shift"}, "j",
         function ()
@@ -233,13 +232,14 @@ globalkeys =
     key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
     key({ modkey }, "e",                function () awful.util.spawn("uxterm") end),
-    key({ modkey }, "w",                function () awful.util.spawn("firefox") end),
+    key({ modkey }, "w",                function () awful.util.spawn("firefox-3.5") end),
 
-    key({ modkey, "Shift"   }, "p",     function () awful.util.spawn("mpc toggle") end),
-    key({ modkey, "Shift"   }, "b",     function () awful.util.spawn("mpc previous") end),
-    key({ modkey, "Shift"   }, "n",     function () awful.util.spawn("mpc next") end),
-    key({ modkey, "Shift"   }, "u",     function () awful.util.spawn("mpc volume +2") end),
-    key({ modkey, "Shift"   }, "d",     function () awful.util.spawn("mpc volume -2") end),
+    key({ modkey, "Control" }, "p",     function () awful.util.spawn("mpc toggle") end),
+    key({ modkey, "Control" }, "b",     function () awful.util.spawn("mpc previous") end),
+    key({ modkey, "Control" }, "n",     function () awful.util.spawn("mpc next") end),
+    key({ modkey, "Control" }, "u",     function () awful.util.spawn("mpc volume +2") end),
+    key({ modkey, "Control" }, "d",     function () awful.util.spawn("mpc volume -2") end),
+    key({ modkey, "Control" }, "b",     function () awful.util.spawn("/home/rgh/dev/ruby/bookmarker/bm add") end),
 
 
     -- Prompt
@@ -423,7 +423,7 @@ awful.hooks.manage.register(function (c, startup)
     -- awful.client.setslave(c)
 
     -- Honor size hints: if you want to drop the gaps between windows, set this to false.
-    c.size_hints_honor = false
+    c.size_hints_honor = true
 end)
 
 -- Hook function to execute when arranging the screen.
