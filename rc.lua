@@ -243,8 +243,7 @@ globalkeys = awful.util.table.join(
     -- Local
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
-    awful.key({ modkey }, "e",                function () awful.util.spawn("uxterm") end),
-    awful.key({ modkey }, "w",                function () awful.util.spawn("firefox-3.5") end),
+    awful.key({ modkey }, "w",                function () awful.util.spawn("iceweasel") end),
 
     awful.key({ modkey, "Control" }, "p",     function () awful.util.spawn("mpc toggle") end),
     awful.key({ modkey, "Control" }, "b",     function () awful.util.spawn("mpc previous") end),
@@ -468,7 +467,7 @@ function add_calendar(inc_offset)
     cal = string.gsub(cal, "^%s*(.-)%s*$", "%1")
     calendar = naughty.notify({
         text = string.format('<span font_desc="%s">%s</span>', "monospace", os.date("%a, %d %B %Y") .. "\n" .. cal),
-        timeout = 0, hover_timeout = 0.5,
+        timeout = 10, hover_timeout = 0.5,
         width = 160,
     })
 end
