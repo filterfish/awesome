@@ -57,6 +57,7 @@ floatapps =
     ["gimp"] = true,
     ["gvim"] = true,
     -- by instance
+    ["fuxterm"] = true,
     ["mocp"] = true
 }
 
@@ -228,6 +229,7 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey, "Shift"   }, "Return", function () awful.util.spawn('fuxterm') end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -241,9 +243,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
     -- Local
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
-
-    awful.key({ modkey }, "w",                function () awful.util.spawn("iceweasel") end),
+    awful.key({ modkey }, "\\",               function () awful.util.spawn("iceweasel") end),
 
     awful.key({ modkey, "Control" }, "p",     function () awful.util.spawn("mpc toggle") end),
     awful.key({ modkey, "Control" }, "b",     function () awful.util.spawn("mpc previous") end),
@@ -377,7 +377,7 @@ awful.hooks.manage.register(function (c, startup)
     end
     -- Add mouse bindings
     c:buttons(awful.util.table.join(
-        awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
+        awful.button({ }, 1, function (c) client.focus = c end),
         awful.button({ modkey }, 1, awful.mouse.client.move),
         awful.button({ modkey }, 2, awful.mouse.client.resize)
     ))
@@ -418,7 +418,7 @@ awful.hooks.manage.register(function (c, startup)
     -- awful.client.setslave(c)
 
     -- Honor size hints: if you want to drop the gaps between windows, set this to false.
-    -- c.size_hints_honor = false
+    c.size_hints_honor = true
 end)
 
 -- Hook function to execute when arranging the screen.
