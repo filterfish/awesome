@@ -84,7 +84,9 @@ end
 
 -- {{{ Wibox
 -- Create a textbox widget
-clockbox = awful.widget.textclock({ align = "right" })
+clockbox = awful.widget.textclock({ align = "right"}, " %H:%M", 1)
+
+
 -- Set the default text in textbox
 -- mytextbox.text = "<b><small> " .. awesome.release .. " </small></b>"
 
@@ -182,9 +184,9 @@ for s = 1, screen.count() do
             mypromptbox[s],
             layout = awful.widget.layout.horizontal.leftright
         },
-        clockbox,
         mylayoutbox[s],
         s == 1 and mysystray or nil ,
+        clockbox,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
