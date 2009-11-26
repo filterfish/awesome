@@ -11,17 +11,14 @@ require("naughty")
 require("debian.menu")
 
 -- {{{ Variable definitions
--- Themes define colours, icons, and wallpapers
--- The default is a dark theme
-theme_path = "/home/rgh/.config/awesome/theme.lua"
--- Uncommment this for a lighter theme
--- theme_path = "/usr/share/awesome/themes/sky/theme.lua"
-
--- Actually load theme
-beautiful.init(theme_path)
+--
+-- Load theme
+beautiful.init("/home/rgh/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
+floating_terminal = "/home/rgh/bin/fuxterm"
+
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -122,11 +119,11 @@ mytasklist.buttons = awful.util.table.join(
                                           end),
                      awful.button({ }, 4, function ()
                                               awful.client.focus.byidx(1)
-                                              if client.focus then client.focus:raise() end
+                                              -- if client.focus then client.focus:raise() end
                                           end),
                      awful.button({ }, 5, function ()
                                               awful.client.focus.byidx(-1)
-                                              if client.focus then client.focus:raise() end
+                                              -- if client.focus then client.focus:raise() end
                                           end))
 
 for s = 1, screen.count() do
@@ -181,8 +178,8 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    awful.key({ "Control", "Shift"}, "h", awful.tag.viewprev),
-    awful.key({ "Control", "Shift"}, "l", awful.tag.viewnext),
+    awful.key({ modkey,           }, "l", awful.tag.viewnext),
+    awful.key({ modkey,           }, "h", awful.tag.viewprev),
     awful.key({ modkey,           }, ".", awful.tag.history.restore),
 
     awful.key({ "Control", "Shift"}, "j",
@@ -212,12 +209,12 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey, "Shift"   }, "Return", function () awful.util.spawn('fuxterm') end),
+    -- awful.key({ modkey, "Control" }, "Return", function () awful.util.spawn(floating_terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
+    awful.key({ "Control", "Shift"}, "h",     function () awful.tag.incmwfact( 0.05)    end),
+    awful.key({ "Control", "Shift"}, "l",     function () awful.tag.incmwfact(-0.05)    end),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
@@ -226,6 +223,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
     -- Local
+    awful.key({ modkey }, "k",                function () awful.util.spawn("workrave") end),
+    awful.key({ modkey }, "u",                function () awful.util.spawn("uzbl-browser") end),
     awful.key({ modkey }, "\\",               function () awful.util.spawn("iceweasel") end),
 
     awful.key({ modkey, "Control" }, "p",     function () awful.util.spawn("mpc toggle") end),
@@ -256,7 +255,6 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw() end),
     awful.key({ modkey            }, "t",      awful.client.togglemarked),
-    awful.key({ modkey,           }, ",",      function (c) c.maximized_vertical = not c.maximized_vertical end),
 
     awful.key({ modkey,}, "m",
         function (c)
@@ -323,7 +321,9 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons } },
     { rule = { class = "MPlayer" }, properties = { floating = true } },
-    { rule = { class = "pinentry" }, properties = { floating = true } },
+    { rule = { instance = "gvim" }, properties = { floating = true } },
+    { rule = { instance = "workrave" }, properties = { floating = true, skip_taskbar = true } },
+    { rule = { instance = "fuxterm" }, properties = { floating = true } },
     { rule = { class = "gimp" }, properties = { floating = true } },
 
     -- Set Firefox to always map on tags number 2 of screen 1.
