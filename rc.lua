@@ -178,26 +178,26 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "l", awful.tag.viewnext),
+    awful.key({ modkey,           }, "i", awful.tag.viewnext),
     awful.key({ modkey,           }, "h", awful.tag.viewprev),
     awful.key({ modkey,           }, ".", awful.tag.history.restore),
 
-    awful.key({ "Control", "Shift"}, "j",
+    awful.key({ "Control", "Shift"}, "n",
         function ()
             awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ "Control", "Shift"}, "k",
+    awful.key({ "Control", "Shift"}, "e",
         function ()
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1) end),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1) end),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus( 1)       end),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus(-1)       end),
+    awful.key({ modkey, "Shift"   }, "n", function () awful.client.swap.byidx(  1) end),
+    awful.key({ modkey, "Shift"   }, "e", function () awful.client.swap.byidx( -1) end),
+    awful.key({ modkey, "Control" }, "n", function () awful.screen.focus( 1)       end),
+    awful.key({ modkey, "Control" }, "e", function () awful.screen.focus(-1)       end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
@@ -214,17 +214,15 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
     awful.key({ "Control", "Shift"}, "h",     function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ "Control", "Shift"}, "l",     function () awful.tag.incmwfact(-0.05)    end),
+    awful.key({ "Control", "Shift"}, "i",     function () awful.tag.incmwfact(-0.05)    end),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
-    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
+    awful.key({ modkey, "Shift"   }, "i",     function () awful.tag.incnmaster(-1)      end),
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
+    awful.key({ modkey, "Control" }, "i",     function () awful.tag.incncol(-1)         end),
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
     -- Local
-    awful.key({ modkey }, "k",                function () awful.util.spawn("workrave") end),
-    awful.key({ modkey }, "u",                function () awful.util.spawn("uzbl-browser") end),
     awful.key({ modkey }, "\\",               function () awful.util.spawn("iceweasel") end),
 
     awful.key({ modkey, "Control" }, "p",     function () awful.util.spawn("mpc toggle") end),
@@ -252,7 +250,7 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "x",      function (c) c:kill() end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-    awful.key({ modkey,           }, "o",      awful.client.movetoscreen ),
+    awful.key({ modkey,           }, "y",      awful.client.movetoscreen ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw() end),
     awful.key({ modkey            }, "t",      awful.client.togglemarked),
 
