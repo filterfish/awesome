@@ -40,19 +40,19 @@ layouts =
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
     awful.layout.suit.magnifier
 }
 
 -- {{{ Tags
 -- Define tags table.
-tags = {}
+tags = {
+  layout = {layouts[2], layouts[3], layouts[3], layouts[3], layouts[3], layouts[3], layouts[3], layouts[3], layouts[8]}
+}
 
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, awful.layout.suit.tile.bottom)
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, tags.layout)
 end
 
 -- }}}
