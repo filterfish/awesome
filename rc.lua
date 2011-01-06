@@ -212,16 +212,16 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "i", awful.tag.viewnext),
-    awful.key({ modkey,           }, "h", awful.tag.viewprev),
+    awful.key({ modkey,           }, "v", awful.tag.viewnext),
+    awful.key({ modkey,           }, "c", awful.tag.viewprev),
     awful.key({ modkey,           }, ".", awful.tag.history.restore),
 
-    awful.key({ "Control", "Shift"}, "n",
+    awful.key({ modkey,           }, "n",
         function ()
             awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ "Control", "Shift"}, "e",
+    awful.key({ modkey,           }, "e",
         function ()
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
@@ -242,32 +242,37 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    -- awful.key({ modkey, "Control" }, "Return", function () awful.util.spawn(floating_terminal) end),
-    awful.key({ modkey, "Control" }, "r", awesome.restart),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+    awful.key({ modkey,           }, "Return",      function () awful.util.spawn(terminal) end),
+    awful.key({ modkey, "Shift"   }, "Return",      function () awful.util.spawn(floating_terminal) end),
+    -- awful.key({ modkey, "Control" }, "Return",   function () awful.util.spawn(floating_terminal) end),
+    awful.key({ modkey, "Control" }, "r",           awesome.restart),
+    awful.key({ modkey, "Shift"   }, "q",           awesome.quit),
 
-    awful.key({ "Control", "Shift"}, "h",     function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ "Control", "Shift"}, "i",     function () awful.tag.incmwfact(-0.05)    end),
-    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
-    awful.key({ modkey, "Shift"   }, "i",     function () awful.tag.incnmaster(-1)      end),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
-    awful.key({ modkey, "Control" }, "i",     function () awful.tag.incncol(-1)         end),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
+    awful.key({ "Control", "Shift"}, "t",           function () awful.tag.incmwfact( 0.05)    end),
+    awful.key({ "Control", "Shift"}, "s",           function () awful.tag.incmwfact(-0.05)    end),
+    awful.key({ modkey, "Shift"   }, "t",           function () awful.tag.incnmaster( 1)      end),
+    awful.key({ modkey, "Shift"   }, "s",           function () awful.tag.incnmaster(-1)      end),
+    awful.key({ modkey,           }, "space",       function () awful.layout.inc(layouts,  1) end),
+    awful.key({ modkey, "Shift"   }, "space",       function () awful.layout.inc(layouts, -1) end),
+
+    awful.key({ modkey, "Control"          }, "c",  function () awful.tag.incncol( 1)    end),
+    awful.key({ modkey, "Control", "Shift" }, "c",  function () awful.tag.incncol(-1)    end),
+    awful.key({ modkey, "Shift"   }, "m",           function (c) c.minimized = not c.minimized    end),
 
     -- Local
-    awful.key({ modkey }, "\\",               function () awful.util.spawn("iceweasel") end),
+    awful.key({ modkey }, "\\",                     function () awful.util.spawn("iceweasel") end),
 
-    awful.key({ modkey, "Control" }, "p",     function () awful.util.spawn("mpc toggle") end),
-    awful.key({ modkey, "Control" }, "b",     function () awful.util.spawn("mpc previous") end),
-    awful.key({ modkey, "Control" }, "n",     function () awful.util.spawn("mpc next") end),
-    awful.key({ modkey, "Control" }, "u",     function () awful.util.spawn("mpc volume +2") end),
-    awful.key({ modkey, "Control" }, "d",     function () awful.util.spawn("mpc volume -2") end),
-    awful.key({ modkey, "Control" }, "b",     function () awful.util.spawn("/home/rgh/dev/ruby/bookmarker/bm add") end),
+    awful.key({ modkey, "Shift" }, "p",             function () awful.util.spawn("mpc toggle") end),
+    awful.key({ modkey, "Shift" }, ",",             function () awful.util.spawn("mpc prev") end),
+    awful.key({ modkey, "Shift" }, ".",             function () awful.util.spawn("mpc next") end),
+    awful.key({ modkey, "Shift" }, "u",             function () awful.util.spawn("mpc volume +2") end),
+    awful.key({ modkey, "Shift" }, "d",             function () awful.util.spawn("mpc volume -2") end),
+
+    awful.key({ modkey, "Shift" }, "b",             function () awful.util.spawn("bm add") end),
 
     -- Prompt
-    awful.key({ modkey }, "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey }, "r",                      function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey,}, "o",                      function () awful.layout.set(awful.layout.suit.floating) end),
 
     awful.key({ modkey }, "x",
               function ()
@@ -283,7 +288,7 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey, "Shift"   }, "x",      function (c) c:kill() end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle ),
-    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
+    awful.key({ modkey, "Control" }, "Return", function (c) awful.client.next(1, c):swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "y",      awful.client.movetoscreen ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw() end),
     awful.key({ modkey            }, "t",      awful.client.togglemarked),
