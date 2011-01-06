@@ -269,6 +269,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift" }, "d",             function () awful.util.spawn("mpc volume -2") end),
 
     awful.key({ modkey, "Shift" }, "b",             function () awful.util.spawn("bm add") end),
+    awful.key({ modkey,         }, "i",             function () client.focus:raise(); end),
+
 
     -- Prompt
     awful.key({ modkey }, "r",                      function () mypromptbox[mouse.screen]:run() end),
@@ -341,7 +343,7 @@ for i = 1, keynumber do
 end
 
 clientbuttons = awful.util.table.join(
-    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
+    awful.button({ }, 1, function (c) client.focus = c; end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 2, awful.mouse.client.resize))
 
