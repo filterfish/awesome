@@ -360,8 +360,8 @@ awful.rules.rules = {
                                  maximized_horizontal = false,
                                  buttons = clientbuttons } },
     { rule = { class = "MPlayer" }, properties = { floating = true } },
+    { rule = { class = "Glurp" }, properties = { floating = true, ontop = true, skip_taskbar = true } },
     { rule = { instance = "gvim" }, properties = { floating = true } },
-    { rule = { instance = "workrave" }, properties = { floating = true, skip_taskbar = true } },
     { rule = { instance = "fuxterm" }, properties = { floating = true } },
     { rule = { class = "gimp" }, properties = { floating = true } },
 
