@@ -112,20 +112,15 @@ function battery_status ()
         local battery_num = string.match(line, "Battery \#(%d+)")
         local battery_load = string.match(line, " (%d*\.%d+)%%")
         local time_rem = string.match(line, "(%d+\:%d+)\:%d+")
-    local discharging
-    if string.match(line, "discharging")=="discharging" then --discharging: always red
-        discharging="<span color=\"#CC7777\">"
-    elseif tonumber(battery_load)>85 then --almost charged
-        discharging="<span color=\"#77CC77\">"
-    else --charging
-        discharging="<span color=\"#CCCC77\">"
-    end
+        local discharging
+        if string.match(line, "discharging")=="discharging" then --discharging: always red
+            discharging="<span color=\"#CC7777\">"
+            elseif tonumber(battery_load)>85 then --almost charged
+            discharging="<span color=\"#77CC77\">"
+        else --charging
+            discharging="<span color=\"#CCCC77\">"
+        end
         table.insert(output, discharging..battery_load.."%".."</span>")
---        if battery_num and battery_load and time_rem then
---            table.insert(output,discharging.."BAT#"..battery_num.." "..battery_load.."%% "..time_rem.."</span>")
---        elseif battery_num and battery_load then --remaining time unavailable
---            table.insert(output,discharging.."BAT#"..battery_num.." "..battery_load.."%%</span>")
---        end --even more data unavailable: we might be getting an unexpected output format, so let's just skip this line.
         line=fd:read() --read next line
     end
     return table.concat(output," ") --FIXME: better separation for several batteries. maybe a pipe?
@@ -145,6 +140,7 @@ mytasklist.buttons = awful.util.table.join(
                                                   awful.tag.viewonly(c:tags()[1])
                                               end
                                               client.focus = c
+                                              if client.focus then client.focus:raise() end
                                           end),
                      awful.button({ }, 3, function ()
                                               if instance then
