@@ -352,12 +352,13 @@ root.keys(globalkeys)
 -- {{{ Rules
 awful.rules.rules = {
     -- All clients will match this rule.
-    { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = true,
-                     keys = clientkeys,
-                     buttons = clientbuttons } },
+    { rule = { }, properties = { border_width = beautiful.border_width,
+                                 border_color = beautiful.border_normal,
+                                 focus = true,
+                                 keys = clientkeys,
+                                 maximized_vertical   = false,
+                                 maximized_horizontal = false,
+                                 buttons = clientbuttons } },
     { rule = { class = "MPlayer" }, properties = { floating = true } },
     { rule = { instance = "gvim" }, properties = { floating = true } },
     { rule = { instance = "workrave" }, properties = { floating = true, skip_taskbar = true } },
