@@ -265,8 +265,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift" }, "p",             function () awful.util.spawn("mpc toggle") end),
     awful.key({ modkey, "Shift" }, ",",             function () awful.util.spawn("mpc prev") end),
     awful.key({ modkey, "Shift" }, ".",             function () awful.util.spawn("mpc next") end),
-    awful.key({ modkey, "Shift" }, "u",             function () awful.util.spawn("mpc volume +2") end),
-    awful.key({ modkey, "Shift" }, "d",             function () awful.util.spawn("mpc volume -2") end),
+    awful.key({ modkey, "Shift" }, "u",             function () awful.util.spawn("zsh -c \"pacmd set-sink-volume 0 $(printf '0x%x' $(( $(pacmd dump|grep set-sink-volume|sed -n '1p'|cut -f3 -d' ') + 0xf00)) )\"") end),
+    awful.key({ modkey, "Shift" }, "d",             function () awful.util.spawn("zsh -c \"pacmd set-sink-volume 0 $(printf '0x%x' $(( $(pacmd dump|grep set-sink-volume|sed -n '1p'|cut -f3 -d' ') - 0xf00)) )\"") end),
 
     awful.key({ modkey, "Shift" }, "b",             function () awful.util.spawn("bm add") end),
     awful.key({ modkey,         }, "i",             function () client.focus:raise(); end),
