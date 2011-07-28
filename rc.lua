@@ -45,13 +45,12 @@ layouts =
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.max,
-    awful.layout.suit.magnifier
 }
 
 -- {{{ Tags
 -- Define tags table.
 tags = {
-  layout = {layouts[2], layouts[4], layouts[4], layouts[4], layouts[4], layouts[4], layouts[4], layouts[4], layouts[8]}
+  layout = {layouts[2], layouts[6], layouts[6], layouts[6], layouts[6], layouts[6], layouts[6], layouts[6], layouts[8]}
 }
 
 for s = 1, screen.count() do
