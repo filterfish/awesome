@@ -24,6 +24,8 @@ floating_terminal = "/home/rgh/bin/fuxterm"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
+audio_device = 'alsa_output.pci-0000_00_1b.0.analog-stereo'
+
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -271,8 +273,10 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift" }, "p",             function () awful.util.spawn("mpc toggle") end),
     awful.key({ modkey, "Shift" }, ",",             function () awful.util.spawn("mpc prev") end),
     awful.key({ modkey, "Shift" }, ".",             function () awful.util.spawn("mpc next") end),
-    awful.key({ modkey, "Shift" }, "u",             function () awful.util.spawn("zsh -c \"pacmd set-sink-volume 0 $(printf '0x%x' $(( $(pacmd dump|grep set-sink-volume|sed -n '1p'|cut -f3 -d' ') + 0xf00)) )\"") end),
-    awful.key({ modkey, "Shift" }, "d",             function () awful.util.spawn("zsh -c \"pacmd set-sink-volume 0 $(printf '0x%x' $(( $(pacmd dump|grep set-sink-volume|sed -n '1p'|cut -f3 -d' ') - 0xf00)) )\"") end),
+
+    -- Set the volume.
+    awful.key({ modkey, "Shift" }, "u",             function () awful.util.spawn("zsh -c \"pacmd set-sink-volume '" .. audio_device .. "' $(printf '0x%x' $(( $(pacmd dump|awk '/set-sink-volume.*" .. audio_device .. "/{ print $3}') + 0x1000)))\"") end),
+    awful.key({ modkey, "Shift" }, "d",             function () awful.util.spawn("zsh -c \"pacmd set-sink-volume '" .. audio_device .. "' $(printf '0x%x' $(( $(pacmd dump|awk '/set-sink-volume.*" .. audio_device .. "/{ print $3}') - 0x1000)))\"") end),
 
     awful.key({ modkey, "Shift" }, "b",             function () awful.util.spawn("bm add") end),
     awful.key({ modkey,         }, "i",             function () client.focus:raise(); end),
