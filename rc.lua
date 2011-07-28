@@ -7,6 +7,8 @@ require("beautiful")
 -- Notification library
 require("naughty")
 
+require("obvious.clock")
+
 -- Load Debian menu entries
 require("debian.menu")
 
@@ -59,7 +61,11 @@ end
 
 -- {{{ Wibox
 -- Create a textbox widget
-clockbox = awful.widget.textclock({ align = "right"}, " %H:%M", 1)
+-- clockbox = awful.widget.textclock({ align = "right"}, " %H:%M", 1)
+
+obvious.clock.set_editor("xterm -e vim")
+obvious.clock.set_shortformat("%H:%M")
+obvious.clock.set_longformat("%d/%m/%Y")
 
 
 -- Set the default text in textbox
@@ -194,8 +200,8 @@ for s = 1, screen.count() do
         },
         mylayoutbox[s],
         s == 1 and mysystray or nil ,
-        clockbox,
         mybattmon,
+        obvious.clock(),
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
