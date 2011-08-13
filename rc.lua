@@ -298,6 +298,12 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw() end),
     awful.key({ modkey            }, "t",      awful.client.togglemarked),
 
+    awful.key({ modkey,}, "h",
+        function (c)
+            c.maximized_horizontal = not c.maximized_horizontal
+            c:raise()
+        end),
+
     awful.key({ modkey,}, "m",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
