@@ -19,7 +19,7 @@ beautiful.init("/home/rgh/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
-floating_terminal = "/home/rgh/bin/fuxterm"
+floating_terminal = "x-terminal-emulator -class FloatingUXterm"
 
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
@@ -74,7 +74,6 @@ obvious.clock.set_longformat("%d/%m/%Y")
 
 -- Create a laucher widget and a main menu
 myawesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua" },
    { "restart", awesome.restart },
    { "quit", awesome.quit }
@@ -247,7 +246,6 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return",      function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Shift"   }, "Return",      function () awful.util.spawn(floating_terminal) end),
-    -- awful.key({ modkey, "Control" }, "Return",   function () awful.util.spawn(floating_terminal) end),
     awful.key({ modkey, "Control" }, "r",           awesome.restart),
     awful.key({ modkey, "Shift"   }, "q",           awesome.quit),
 
@@ -368,13 +366,17 @@ awful.rules.rules = {
                                  buttons = clientbuttons } },
     { rule = { class = "MPlayer" }, properties = { floating = true } },
     { rule = { class = "Glurp" }, properties = { floating = true, ontop = true, skip_taskbar = true } },
-    { rule = { instance = "gvim" }, properties = { floating = true } },
-    { rule = { instance = "fuxterm" }, properties = { floating = true } },
-    { rule = { class = "gimp" }, properties = { floating = true } },
-
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
+    { rule = { class = "FloatingUXterm" }, properties = { floating = true, ontop = true, skip_taskbar = true}, callback = function(c) awful.placement.under_mouse(c); end },
+    { rule = { class = "Empathy", role = "chat" }, properties = { floating = true } },
+    { rule = { class = "Empathy", role = "contact_list" }, properties = { floating = true, tag = tags[1][1] },
+      callback = function( c )
+        local w_area = screen[ c.screen ].workarea
+        local strutwidth = 400
+        c:struts( { right = strutwidth } )
+        c:geometry( { x = w_area.width - strutwidth, width = strutwidth, y = w_area.y, height = w_area.height } )
+      end
+    },
+    { rule = { class = "Gimp" }, properties = { floating = true } },
 }
 -- }}}
 
