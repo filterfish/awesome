@@ -61,16 +61,11 @@ end
 -- }}}
 
 -- {{{ Wibox
--- Create a textbox widget
--- clockbox = awful.widget.textclock({ align = "right"}, " %H:%M", 1)
-
 obvious.clock.set_editor("xterm -e vim")
-obvious.clock.set_shortformat("%H:%M")
+obvious.clock.set_shortformat("%H:%M:%S")
 obvious.clock.set_longformat("%d/%m/%Y")
+obvious.clock.set_shorttimer(1)
 
-
--- Set the default text in textbox
--- mytextbox.text = "<b><small> " .. awesome.release .. " </small></b>"
 
 -- Create a laucher widget and a main menu
 myawesomemenu = {
