@@ -367,8 +367,8 @@ awful.rules.rules = {
   { rule = { class = "MPlayer" }, properties = { floating = true } },
   { rule = { class = "Glurp" }, properties = { floating = true, ontop = true, skip_taskbar = true } },
   { rule = { class = "FloatingUXterm" }, properties = { floating = true, ontop = true, skip_taskbar = true}, callback = function(c) awful.placement.under_mouse(c); end },
-  { rule = { class = "Empathy", role = "chat" }, properties = { floating = true } },
-  { rule = { class = "Empathy", role = "contact_list" }, properties = { floating = true, tag = tags[1][1] },
+  { rule = { class = "Pidgin", role = "conversation" }, properties = { floating = true } },
+  { rule = { class = "Pidgin", role = "buddy_list" }, properties = { floating = true, tag = tags[1][1] },
     callback = function( c )
       local w_area = screen[ c.screen ].workarea
       local strutwidth = 400
