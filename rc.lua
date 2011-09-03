@@ -24,6 +24,8 @@ beautiful.init("/home/rgh/.config/awesome/theme.lua")
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
 floating_terminal = "x-terminal-emulator -class FloatingUXterm"
+todo = "x-terminal-emulator -class FloatingUXterm -e '$HOME/bin/todo TODO'"
+sratch = "x-terminal-emulator -class FloatingUXterm -e '$HOME/bin/todo SCRATCH'"
 
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
@@ -244,7 +246,9 @@ globalkeys = awful.util.table.join(
 
   -- Standard program
   awful.key({modkey,           }, "Return",       function () awful.util.spawn(terminal) end),
-  awful.key({modkey,           }, "/",            function () awful.util.spawn(floating_terminal) end),
+  awful.key({modkey,           }, "/",            function () awful.util.spawn(todo) end),
+  awful.key({modkey, "Shift"   }, "/",            function () awful.util.spawn(sratch) end),
+  awful.key({modkey, "Shift"   }, "Return",       function () awful.util.spawn(floating_terminal) end),
   awful.key({modkey, "Control" }, "r",            awesome.restart),
   awful.key({modkey, "Shift"   }, "q",            awesome.quit),
 
