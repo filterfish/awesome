@@ -12,6 +12,10 @@ require("obvious.clock")
 -- Load Debian menu entries
 require("debian.menu")
 
+require("./lib/run-once")
+
+run_once("pidgin")
+
 -- {{{ Variable definitions
 --
 -- Load theme
