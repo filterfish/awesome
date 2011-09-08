@@ -244,6 +244,14 @@ globalkeys = awful.util.table.join(
     end
   end),
 
+  awful.key({modkey            }, "x",
+  function ()
+    awful.prompt.run({ prompt = "Run Lua code: " },
+    mypromptbox[mouse.screen].widget,
+    awful.util.eval, nil,
+    awful.util.getdir("cache") .. "/history_eval")
+  end),
+
   -- Standard program
   awful.key({modkey,           }, "Return",       function () awful.util.spawn(terminal) end),
   awful.key({modkey,           }, "/",            function () awful.util.spawn(todo) end),
@@ -266,6 +274,7 @@ globalkeys = awful.util.table.join(
   -- Local
   awful.key({modkey }, "\\",                      function () awful.util.spawn("iceweasel") end),
 
+  -- mpc bindings
   awful.key({modkey, "Shift"   }, "p",            function () awful.util.spawn("mpc toggle") end),
   awful.key({modkey, "Shift"   }, ",",            function () awful.util.spawn("mpc prev") end),
   awful.key({modkey, "Shift"   }, ".",            function () awful.util.spawn("mpc next") end),
@@ -274,20 +283,14 @@ globalkeys = awful.util.table.join(
   awful.key({modkey, "Shift"   }, "u",            function () awful.util.spawn(audio_volume_up) end),
   awful.key({modkey, "Shift"   }, "d",            function () awful.util.spawn(audio_volume_down) end),
 
+  -- bookmarker (I don't think this works anymore)
   awful.key({modkey, "Shift"   }, "b",            function () awful.util.spawn("bm add") end),
+
   awful.key({modkey,           }, "i",            function () client.focus:raise(); end),
 
   -- Prompt
   awful.key({modkey            }, "r",            function () mypromptbox[mouse.screen]:run() end),
-  awful.key({modkey            }, "o",            function () awful.layout.set(awful.layout.suit.floating) end),
-
-  awful.key({modkey            }, "x",
-  function ()
-    awful.prompt.run({ prompt = "Run Lua code: " },
-    mypromptbox[mouse.screen].widget,
-    awful.util.eval, nil,
-    awful.util.getdir("cache") .. "/history_eval")
-  end)
+  awful.key({modkey            }, "o",            function () awful.layout.set(awful.layout.suit.floating) end)
   )
 
 -- Client awful tagging: this is useful to tag some clients and then do stuff like move to tag on them
