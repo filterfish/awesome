@@ -272,6 +272,10 @@ globalkeys = awful.util.table.join(
   awful.key({modkey, "Shift"   }, "m",            function (c) c.minimized = not c.minimized    end),
 
   -- Local
+
+  -- paste the clipboad
+  awful.key({modkey }, "b",                       function () awful.util.spawn("xdotool click 2") end),
+
   awful.key({modkey }, "\\",                      function () awful.util.spawn("iceweasel") end),
 
   -- mpc bindings
