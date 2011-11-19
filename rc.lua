@@ -59,7 +59,7 @@ layouts =
 -- {{{ Tags
 -- Define tags table.
 tags = {
-  layout = {layouts[2], layouts[7], layouts[7], layouts[7], layouts[7], layouts[7], layouts[7], layouts[7], layouts[8]}
+  layout = {layouts[4], layouts[7], layouts[7], layouts[7], layouts[7], layouts[7], layouts[7], layouts[7], layouts[8]}
 }
 
 for s = 1, screen.count() do
