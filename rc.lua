@@ -71,8 +71,8 @@ end
 
 -- {{{ Wibox
 obvious.clock.set_editor("xterm -e vim")
-obvious.clock.set_shortformat("%H:%M:%S")
-obvious.clock.set_longformat("%d/%m/%Y")
+obvious.clock.set_shortformat("%d/%m/%Y %H:%M:%S")
+obvious.clock.set_longformat("%d/%m/%Y %H:%M:%S")
 obvious.clock.set_shorttimer(1)
 
 
