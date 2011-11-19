@@ -379,11 +379,14 @@ awful.rules.rules = {
                                maximized_vertical   = false,
                                maximized_horizontal = false,
                                buttons = clientbuttons } },
-  { rule = { class = "MPlayer" }, properties = { floating = true } },
-  { rule = { class = "Glurp" }, properties = { floating = true, ontop = true, skip_taskbar = true } },
-  { rule = { class = "Ario" }, properties = { floating = true, skip_taskbar = true } },
   { rule = { class = "FloatingUXterm" }, properties = { floating = true, ontop = true, skip_taskbar = true}, callback = function(c) awful.placement.under_mouse(c); end },
+  { rule = { class = "MPlayer" }, properties = { floating = true } },
+  { rule = { class = "Ario" }, properties = { floating = true, skip_taskbar = true } },
+  { rule = { name = "Iceweasel Preferences" }, properties = { floating = true, skip_taskbar = true } },
+  { rule = { class = "Pinentry" }, properties = { floating = true, ontop = true, skip_taskbar = true } },
+  { rule = { class = "Glurp" }, properties = { floating = true, ontop = true, skip_taskbar = true } },
   { rule = { class = "Pidgin", role = "conversation" }, properties = { floating = true, tag = tags[1][1] } },
+  { rule = { class = "Pidgin", role = "file transfer" }, properties = { floating = true, tag = tags[1][1] } },
   { rule = { class = "Pidgin", role = "buddy_list" }, properties = { floating = true, tag = tags[1][1] },
     callback = function( c )
       local w_area = screen[ c.screen ].workarea
