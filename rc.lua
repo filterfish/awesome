@@ -384,6 +384,7 @@ awful.rules.rules = {
   { rule = { class = "FloatingUXterm" }, properties = { floating = true, ontop = true, skip_taskbar = true}, callback = function(c) awful.placement.under_mouse(c); end },
   { rule = { class = "MPlayer" }, properties = { floating = true } },
   { rule = { class = "Ario" }, properties = { floating = true, skip_taskbar = true } },
+  { rule = { class = "Iceweasel", "Vimperator"}, properties = {tag = tags[1][9] } },
   { rule = { name = "Iceweasel Preferences" }, properties = { floating = true, skip_taskbar = true } },
   { rule = { class = "Pinentry" }, properties = { floating = true, ontop = true, skip_taskbar = true } },
   { rule = { class = "Glurp" }, properties = { floating = true, ontop = true, skip_taskbar = true } },
