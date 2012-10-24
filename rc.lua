@@ -219,6 +219,7 @@ globalkeys = awful.util.table.join(
   awful.key({ modkey,           }, "v", awful.tag.viewnext),
   awful.key({ modkey,           }, "c", awful.tag.viewprev),
   awful.key({ modkey,           }, ".", awful.tag.history.restore),
+  awful.key({ modkey,           }, ",", function () awful.tag.viewonly(tags[mouse.screen][1]) end),
 
   awful.key({ modkey,           }, "n",
   function ()
