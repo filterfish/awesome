@@ -24,7 +24,8 @@ beautiful.init("/home/rgh/.config/awesome/theme.lua")
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
 floating_terminal = "x-terminal-emulator -class FloatingUXterm"
-todo = "x-terminal-emulator -class FloatingUXterm -e '$HOME/bin/todo TODO'"
+todo = 'sh -c "pid=\\$(ps -ef | grep \\$(xdotool getactivewindow getwindowpid) | grep -v grep | awk \\"/\\$(basename \\$(getent passwd \\\$LOGNAME | awk -F: \\"{print \\\\$NF}\\"))/{print \\\\$2}\\") x-terminal-emulator -class FloatingUXterm -e \\"\$HOME/bin/todo TODO\\""'
+
 sratch = "x-terminal-emulator -class FloatingUXterm -e '$HOME/bin/todo SCRATCH'"
 
 editor = os.getenv("EDITOR") or "editor"
@@ -221,7 +222,7 @@ globalkeys = awful.util.table.join(
 
   awful.key({ modkey,           }, "n",
   function ()
-    awful.client.focus.byidx( 1)
+    awful.client.focus.byidx(1)
     if client.focus then client.focus:raise() end
   end),
   awful.key({ modkey,           }, "e",
@@ -231,9 +232,9 @@ globalkeys = awful.util.table.join(
   end),
 
   -- Layout manipulation
-  awful.key({ modkey, "Shift"   }, "n", function () awful.client.swap.byidx(  1) end),
-  awful.key({ modkey, "Shift"   }, "e", function () awful.client.swap.byidx( -1) end),
-  awful.key({ modkey, "Control" }, "n", function () awful.screen.focus( 1)       end),
+  awful.key({ modkey, "Shift"   }, "n", function () awful.client.swap.byidx( 1) end),
+  awful.key({ modkey, "Shift"   }, "e", function () awful.client.swap.byidx(-1) end),
+  awful.key({ modkey, "Control" }, "n", function () awful.screen.focus(1)       end),
   awful.key({ modkey, "Control" }, "e", function () awful.screen.focus(-1)       end),
   awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
   awful.key({ modkey,           }, "Tab",
@@ -260,21 +261,21 @@ globalkeys = awful.util.table.join(
   awful.key({modkey, "Control" }, "r",            awesome.restart),
   awful.key({modkey, "Shift"   }, "q",            awesome.quit),
 
-  awful.key({"Control", "Shift"}, "t",            function () awful.tag.incmwfact( 0.05)    end),
+  awful.key({"Control", "Shift"}, "t",            function () awful.tag.incmwfact(0.05)    end),
   awful.key({"Control", "Shift"}, "s",            function () awful.tag.incmwfact(-0.05)    end),
-  awful.key({modkey, "Shift"   }, "t",            function () awful.tag.incnmaster( 1)      end),
+  awful.key({modkey, "Shift"   }, "t",            function () awful.tag.incnmaster(1)      end),
   awful.key({modkey, "Shift"   }, "s",            function () awful.tag.incnmaster(-1)      end),
-  awful.key({modkey,           }, "space",        function () awful.layout.inc(layouts,  1) end),
+  awful.key({modkey,           }, "space",        function () awful.layout.inc(layouts, 1) end),
   awful.key({modkey, "Shift"   }, "space",        function () awful.layout.inc(layouts, -1) end),
 
-  awful.key({modkey, "Control"          }, "c",   function () awful.tag.incncol( 1)    end),
+  awful.key({modkey, "Control"          }, "c",   function () awful.tag.incncol(1)    end),
   awful.key({modkey, "Control", "Shift" }, "c",   function () awful.tag.incncol(-1)    end),
   awful.key({modkey, "Shift"   }, "m",            function (c) c.minimized = not c.minimized    end),
 
   -- Local
 
   -- paste the clipboad
-  awful.key({modkey }, "b",                       function () awful.util.spawn("xdotool click 2") end),
+  awful.key({modkey            }, "b",            function () awful.util.spawn("/home/rgh/bin/paste-into-window") end),
 
   awful.key({modkey }, "\\",                      function () awful.util.spawn("iceweasel") end),
 
