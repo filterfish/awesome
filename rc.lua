@@ -19,7 +19,8 @@ run_once("pidgin")
 -- {{{ Variable definitions
 --
 -- Load theme
-beautiful.init("/home/rgh/.config/awesome/theme.lua")
+-- beautiful.init("/home/rgh/.config/awesome/theme.lua")
+beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
