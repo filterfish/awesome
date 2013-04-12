@@ -386,16 +386,17 @@ awful.rules.rules = {
   { rule = { class = "MPlayer" }, properties = { floating = true } },
   { rule = { class = "Pavucontrol" }, properties = { floating = true } },
   { rule = { class = "Ario" }, properties = { floating = true, skip_taskbar = true } },
-  { rule = { class = "Iceweasel"}, properties = {tag = tags[1][9] } },
+  { rule = { class = "Iceweasel", "Vimperator"}, properties = {tag = tags[1][9] } },
   { rule = { class = "Iceweasel", name = "Preferences" }, properties = { floating = true, skip_taskbar = true } },
   { rule = { class = "Pinentry" }, properties = { floating = true, ontop = true, skip_taskbar = true } },
+  { rule = { class = "feh" }, properties = { floating = true } },
   { rule = { class = "Glurp" }, properties = { floating = true, ontop = true, skip_taskbar = true } },
   { rule = { class = "Pidgin", role = "conversation" }, properties = { floating = true, tag = tags[1][1] } },
   { rule = { class = "Pidgin", role = "file transfer" }, properties = { floating = true, tag = tags[1][1] } },
   { rule = { class = "Pidgin", role = "buddy_list" }, properties = { floating = true, tag = tags[1][1] },
     callback = function( c )
       local w_area = screen[ c.screen ].workarea
-      local strutwidth = 400
+      local strutwidth = 424
       c:struts( { right = strutwidth } )
       c:geometry( { x = w_area.width - strutwidth, width = strutwidth, y = w_area.y, height = w_area.height } )
     end
