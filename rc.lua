@@ -34,8 +34,8 @@ editor_cmd = terminal .. " -e " .. editor
 
 audio = 'alsa_output.pci-0000_00_1b.0.analog-stereo'
 
-audio_volume_up = "zsh -c \"pacmd set-sink-volume '" .. audio .. "' $(printf '0x%x' $(( $(pacmd dump|awk '/set-sink-volume.*" .. audio .. "/{ print $3}') + 0x1000)))\""
-audio_volume_down = "zsh -c \"pacmd set-sink-volume '" .. audio .. "' $(printf '0x%x' $(( $(pacmd dump|awk '/set-sink-volume.*" .. audio .. "/{ print $3}') - 0x1000)))\""
+audio_volume_up = "pactl -- set-sink-volume " .. audio .. " +5%"
+audio_volume_down = "pactl -- set-sink-volume " .. audio .. " -5%"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
